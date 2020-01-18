@@ -1,14 +1,8 @@
 [
     {
-        "github_username": "StheffanyHadlich",
-        "techs": "React.js, Laravel",
-        "longitude": -50.612434,
-        "latitude": -25.4570443
-    },
-    {
         "github_username": "diego3g",
         "techs": "React.js, Node.js, ReactNative",
-        "longitude": -50.650945899999996,
+        "longitude": -50.6509458,
         "latitude": -25.4700302
     },
     {
