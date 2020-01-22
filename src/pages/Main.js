@@ -5,7 +5,7 @@ import { requestPermissionsAsync, getCurrentPositionAsync } from 'expo-location'
 import { MaterialIcons } from '@expo/vector-icons';
 
 import api from '../services/api';
-import { connect, disconnect, subscribeToNewDevs } from '../services/socket';
+import { connect, disconnect, subscribeToNewDevsAround } from '../services/socket';
 
 function Main({ navigation }) {
     const [currentRegion, setCurrentRegion] = useState(null);
@@ -13,31 +13,31 @@ function Main({ navigation }) {
     const [techs, setTechs] = useState('');
     
     useEffect(() => {
-        async function loadInitialPosition(){
+        async function loadInitialPosition() {
 
-        const { granted } = await requestPermissionsAsync();
+            const { granted } = await requestPermissionsAsync();
 
-        if(granted) {
-            const { coords } = await getCurrentPositionAsync({
-                enableHighAccuracy: true,
-            });
+            if(granted) {
+                const { coords } = await getCurrentPositionAsync({
+                    enableHighAccuracy: true,
+                });
 
-            const { longitude, latitude } = coords;
+                const { longitude, latitude } = coords;
 
-            setCurrentRegion({
-                longitude,
-                latitude,
-                longitudeDelta: 0.15,
-                latitudeDelta: 0.15
-            });
-        }
+                setCurrentRegion({
+                    longitude,
+                    latitude,
+                    longitudeDelta: 0.15,
+                    latitudeDelta: 0.15
+                });
+            }
         }
 
         loadInitialPosition();
     }, []);
 
     useEffect(() => {
-        subscribeToNewDevs(dev => setDevs([...devs, dev]));
+        subscribeToNewDevsAround(dev => setDevs([...devs, dev]));
     }, [devs]);
 
     function setupWebSocket() {
